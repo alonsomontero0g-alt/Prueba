@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TuMarca — Sitio Web Profesional</title>
+  <meta name="description" content="Página web moderna, rápida y accesible para tu negocio." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;      /* fondo base */
+      --bg-soft:#0f172a; /* contenedores */
+      --text:#e5e7eb;    /* texto base */
+      --muted:#94a3b8;   /* texto secundario */
+      --brand:#0ea5e9;   /* color marca */
+      --brand-2:#22d3ee; /* gradiente */
+      --ok:#10b981;      /* acentos */
+      --warn:#f59e0b;
+      --radius:18px;
+      --shadow:0 10px 35px rgba(2,6,23,.4);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.08), transparent),
+                  radial-gradient(1200px 600px at 90% 10%, rgba(14,165,233,.10), transparent),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(1100px, 92%);margin-inline:auto}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:60;background:rgba(11,16,32,.75);backdrop-filter:saturate(180%) blur(12px);
+      border-bottom:1px solid rgba(148,163,184,.15)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.15rem;color:white}
+    .logo-badge{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow);font-weight:800}
+
+    .menu{display:flex;gap:1rem;align-items:center}
+    .menu a{padding:.55rem .85rem;border-radius:12px;color:var(--text)}
+    .menu a:hover{background:rgba(148,163,184,.12)}
+
+    .cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:.65rem 1rem;border-radius:14px;border:0;color:white;font-weight:700;box-shadow:var(--shadow)}
+
+    .nav-toggle{display:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;padding:64px 0 48px}
+    .hero h1{font-size:clamp(1.9rem, 4.5vw, 3.2rem);line-height:1.1;margin:0 0 12px;font-weight:800}
+    .hero p{color:var(--muted);margin:0 0 22px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px
+    }
+
+    /* Features */
+    .grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem}
+    .feature{background:var(--bg-soft);border:1px solid rgba(148,163,184,.16);border-radius:var(--radius);padding:18px}
+    .feature h3{margin:0 0 6px}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .kpi .box{background:rgba(148,163,184,.08);padding:14px;border-radius:12px;text-align:center}
+    .badge{display:inline-block;font-size:.8rem;border:1px solid rgba(148,163,184,.25);border-radius:999px;padding:.2rem .6rem;color:var(--muted)}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3, 1fr);gap:.75rem;margin-top:12px}
+    .ph{aspect-ratio: 4/3;border-radius:12px;background:linear-gradient(135deg, rgba(14,165,233,.22), rgba(34,211,238,.12));border:1px dashed rgba(148,163,184,.35);display:grid;place-items:center;color:var(--muted)}
+
+    /* Contacto */
+    form{display:grid;gap:.75rem;margin-top:12px}
+    input, textarea{width:100%;background:#0b1224;border:1px solid rgba(148,163,184,.25);color:var(--text);padding:.9rem;border-radius:12px}
+    input:focus, textarea:focus{outline:2px solid var(--brand)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+
+    /* Footer */
+    footer{margin:40px 0 60px;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .kpi{grid-template-columns:1fr 1fr}
+      .gallery{grid-template-columns:repeat(2, 1fr)}
+      .row{grid-template-columns:1fr}
+    }
+    @media (max-width: 720px){
+      .menu{position:fixed;inset:66px 12px auto 12px;flex-direction:column;align-items:stretch;background:rgba(11,16,32,.95);padding:12px;border-radius:16px;border:1px solid rgba(148,163,184,.2);transform:scale(.98);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease}
+      .menu.open{opacity:1;transform:scale(1);pointer-events:auto}
+      .nav-toggle{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(148,163,184,.35);padding:.55rem .8rem;border-radius:12px;color:var(--text)}
+      .hide-sm{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navegación -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#inicio"><span class="logo-badge" aria-hidden>TM</span> TuMarca</a>
+      <nav>
+        <button id="btnMenu" class="nav-toggle" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
+        <ul id="menu" class="menu" role="menubar">
+          <li role="none"><a role="menuitem" href="#inicio">Inicio</a></li>
+          <li role="none"><a role="menuitem" href="#servicios">Servicios</a></li>
+          <li role="none"><a role="menuitem" href="#galeria">Galería</a></li>
+          <li role="none"><a role="menuitem" href="#contacto">Contacto</a></li>
+          <li role="none" class="hide-sm"><a class="cta" role="menuitem" href="https://wa.me/50660000000" target="_blank" rel="noopener">Escríbenos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="inicio" class="container hero" aria-label="Portada">
+    <div>
+      <span class="badge">Sitio rápido · Accesible · SEO</span>
+      <h1>Impulsa tu negocio con una web moderna</h1>
+      <p>Diseñada para convertir visitas en clientes. Código limpio, carga veloz y experiencia impecable en móviles.</p>
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+        <a class="cta" href="#contacto">Cotizar proyecto</a>
+        <a class="cta" style="background:linear-gradient(135deg,var(--ok),#34d399)" href="#servicios">Ver servicios</a>
+      </div>
+      <div class="kpi">
+        <div class="box"><strong>+99</strong><br>PageSpeed móvil</div>
+        <div class="box"><strong>SEO</strong><br>Metaetiquetas listas</div>
+        <div class="box"><strong>A11y</strong><br>Buenas prácticas</div>
+      </div>
+    </div>
+    <div class="card" aria-hidden="true">
+      <picture>
+        <source srcset="" type="image/avif">
+        <img alt="Mockup del sitio" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Crect width='100%25' height='100%25' rx='18' ry='18' fill='%23121a35'/%3E%3Crect x='24' y='24' width='852' height='552' rx='14' ry='14' fill='%2318274a'/%3E%3Crect x='48' y='60' width='320' height='24' rx='8' fill='%230ea5e9'/%3E%3Crect x='48' y='108' width='500' height='14' rx='6' fill='%2394a3b8'/%3E%3Crect x='48' y='134' width='460' height='14' rx='6' fill='%2394a3b8'/%3E%3Crect x='48' y='200' width='804' height='320' rx='12' fill='%23121a35'/%3E%3C/svg%3E" style="width:100%;display:block;border-radius:14px;border:1px solid rgba(148,163,184,.2)"/>
+      </picture>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="container" style="padding:24px 0 8px">
+    <h2 style="margin:0 0 12px">Servicios</h2>
+    <p class="muted" style="color:var(--muted);margin:0 0 16px">Elegimos la tecnología adecuada para tu negocio, priorizando velocidad y facilidad de edición.</p>
+    <div class="grid">
+      <article class="feature">
+        <h3>Landing page</h3>
+        <p>Una página de alto impacto para campañas o productos. Sección de héroe, beneficios y contacto.</p>
+      </article>
+      <article class="feature">
+        <h3>Web corporativa</h3>
+        <p>Hasta 5 secciones (Inicio, Sobre nosotros, Servicios, Galería, Contacto) con SEO técnico implementado.</p>
+      </article>
+      <article class="feature">
+        <h3>Tienda ligera</h3>
+        <p>Catálogo simple con enlaces a WhatsApp o pasarela de pago externa. Sin complicaciones.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria" class="container" style="padding:24px 0 8px">
+    <h2 style="margin:0 0 12px">Galería</h2>
+    <div class="gallery" aria-label="Galería de imágenes de proyectos">
+      <div class="ph">Imagen 1</div>
+      <div class="ph">Imagen 2</div>
+      <div class="ph">Imagen 3</div>
+      <div class="ph">Imagen 4</div>
+      <div class="ph">Imagen 5</div>
+      <div class="ph">Imagen 6</div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="container" style="padding:24px 0 8px">
+    <h2 style="margin:0 0 12px">Contacto</h2>
+    <p class="muted" style="color:var(--muted)">Completa el formulario y te responderemos hoy mismo.</p>
+    <form action="mailto:ventas@tumarca.com" method="post" enctype="text/plain" aria-label="Formulario de contacto">
+      <div class="row">
+        <label>
+          <span class="muted">Nombre</span>
+          <input required name="nombre" autocomplete="name" placeholder="Tu nombre" />
+        </label>
+        <label>
+          <span class="muted">Correo</span>
+          <input required type="email" name="email" autocomplete="email" placeholder="tunombre@correo.com" />
+        </label>
+      </div>
+      <label>
+        <span class="muted">Mensaje</span>
+        <textarea required name="mensaje" rows="5" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+      </label>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <button class="cta" type="submit">Enviar</button>
+        <a class="cta" style="background:linear-gradient(135deg,var(--warn),#fbbf24)" href="https://wa.me/50660000000" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> TuMarca. Todos los derechos reservados.</p>
+      <p><a href="#inicio">Ir arriba ↑</a> · <a href="#" aria-label="Política de privacidad">Privacidad</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú móvil accesible
+    const btn = document.getElementById('btnMenu');
+    const menu = document.getElementById('menu');
+    btn?.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Scroll suave para anclas internas
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){
+          e.preventDefault();
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      })
+    });
+  </script>
+</body>
+</html>
